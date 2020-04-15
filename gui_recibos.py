@@ -12,13 +12,22 @@ Builder.load_string(open("gui.kv",encoding="utf-8").read())
 class TelaInicial(Screen):
     pass
 
-class TelaCadastroRecebedor(Screen):
+class TelaCadastrarRecebedor(Screen):
     pass
 
-class TelaCadastroPagador(Screen):
+class TelaCadastrarPagador(Screen):
     pass
 
-class TelaConsultaPagadores(Screen):
+class TelaConsultarPagadores(Screen):
+    pass
+
+class TelaCadastrarItens(Screen):
+    pass
+
+class TelaConsultarItens(Screen):
+    pass
+
+class TelaEmitirRecibo(Screen):
     pass
 
 # cria o gerenciador de telas e adiciona as telas
@@ -26,12 +35,14 @@ class TelaConsultaPagadores(Screen):
 # são usados no arquivo gui.kv para navegação
 sm = ScreenManager()
 sm.add_widget(TelaInicial(name='tela_inicial'))
-sm.add_widget(TelaCadastroRecebedor(name='tela_cadastro_recebedor'))
-sm.add_widget(TelaCadastroPagador(name='tela_cadastro_pagador'))
-sm.add_widget(TelaConsultaPagadores(name='tela_consultar_pagadores'))
+sm.add_widget(TelaCadastrarRecebedor(name='tela_cadastrar_recebedor'))
+sm.add_widget(TelaCadastrarPagador(name='tela_cadastrar_pagador'))
+sm.add_widget(TelaConsultarPagadores(name='tela_consultar_pagadores'))
+sm.add_widget(TelaCadastrarItens(name='tela_cadastrar_itens'))
+sm.add_widget(TelaConsultarItens(name='tela_consultar_itens'))
+sm.add_widget(TelaEmitirRecibo(name='tela_emitir_recibo'))
 
 class Main(App):
-
     def build(self):
         return sm
 

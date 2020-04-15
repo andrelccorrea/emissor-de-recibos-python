@@ -1,67 +1,90 @@
 #:import rgba kivy.utils.rgba
 
 # regras comuns a todas as telas
-<TelaInicial, TelaCadastroRecebedor, TelaCadastroPagador, TelaConsultaPagadores>:
+<TelaInicial, TelaCadastrarRecebedor, TelaCadastrarPagador, TelaConsultarPagadores, TelaCadastrarItens, TelaConsultarItens, TelaEmitirRecibo>:
     # cor de fundo
     canvas.before:
         Color: 
-            rgba: rgba('#f9e6ff')
+            rgba: rgba('#aa80ff')
         Rectangle:
             pos: self.pos
             size: self.size
 
+# regras comuns aos botões
+<Button>:
+    size_hint_y: None
+    height: '100dp'
+    text_size: self.size
+    halign: "center"
+    valign: "center"
+
+# telas
 <TelaInicial>:
     BoxLayout:
         Button:
             text: 'Cadastrar Recebedor'
-            size_hint_y: None
-            height: '100dp'
-            on_press: root.manager.current = 'tela_cadastro_recebedor'
+            on_press: root.manager.current = 'tela_cadastrar_recebedor'
         Button:
             text: 'Cadastrar Pagador'
-            size_hint_y: None
-            height: '100dp'
-            on_press: root.manager.current = 'tela_cadastro_pagador'
+            on_press: root.manager.current = 'tela_cadastrar_pagador'
         Button:
-            text: 'Consulta Pagadores'
-            size_hint_y: None
-            height: '100dp'
+            text: 'Consultar Pagadores'
             on_press: root.manager.current = 'tela_consultar_pagadores'
         Button:
-            text: 'Fazer algo início'
+            text: 'Cadastrar Itens'
+            on_press: root.manager.current = 'tela_cadastrar_itens'
+        Button:
+            text: 'Consultar Itens'
+            on_press: root.manager.current = 'tela_consultar_itens'
+        Button:
+            text: 'Emitir Recibo'
+            on_press: root.manager.current = 'tela_emitir_recibo'
 
-<TelaCadastroRecebedor>:
+
+<TelaCadastrarRecebedor>:
     BoxLayout:
         Button:
             text: 'Voltar'
-            size_hint_y: None
-            height: '100dp'
             on_press: root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Recebedor'
-            size_hint_y: None
-            height: '100dp'
+            text: 'Fazer algo Cadastrar Recebedor'
 
-<TelaCadastroPagador>:
+<TelaCadastrarPagador>:
     BoxLayout:
         Button:
             text: 'Voltar'
-            size_hint_y: None
-            height: '100dp'
             on_press: root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Pagador'
-            size_hint_y: None
-            height: '100dp'
+            text: 'Fazer algo Cadastrar Pagador'
 
-<TelaConsultaPagadores>:
+<TelaConsultarPagadores>:
     BoxLayout:
         Button:
             text: 'Voltar'
-            size_hint_y: None
-            height: '100dp'
             on_press: root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Consulta Pagadores'
-            size_hint_y: None
-            height: '100dp'
+            text: 'Fazer algo Consultar Pagadores'
+
+<TelaCadastrarItens>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Cadastrar Itens'
+
+<TelaConsultarItens>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Consultar Pagadores'
+
+<TelaEmitirRecibo>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Emitir Recibo'
