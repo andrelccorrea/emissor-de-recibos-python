@@ -1,0 +1,67 @@
+#:import rgba kivy.utils.rgba
+
+# regras comuns a todas as telas
+<TelaInicial, TelaCadastroRecebedor, TelaCadastroPagador, TelaConsultaPagadores>:
+    # cor de fundo
+    canvas.before:
+        Color: 
+            rgba: rgba('#f9e6ff')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TelaInicial>:
+    BoxLayout:
+        Button:
+            text: 'Cadastrar Recebedor'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_cadastro_recebedor'
+        Button:
+            text: 'Cadastrar Pagador'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_cadastro_pagador'
+        Button:
+            text: 'Consulta Pagadores'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_consultar_pagadores'
+        Button:
+            text: 'Fazer algo início'
+
+<TelaCadastroRecebedor>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Recebedor'
+            size_hint_y: None
+            height: '100dp'
+
+<TelaCadastroPagador>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Pagador'
+            size_hint_y: None
+            height: '100dp'
+
+<TelaConsultaPagadores>:
+    BoxLayout:
+        Button:
+            text: 'Voltar'
+            size_hint_y: None
+            height: '100dp'
+            on_press: root.manager.current = 'tela_inicial'
+        Button:
+            text: 'Fazer algo Consulta Pagadores'
+            size_hint_y: None
+            height: '100dp'
