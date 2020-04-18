@@ -1,7 +1,9 @@
+#:kivy 1.1
 #:import rgba kivy.utils.rgba
 
 # regras comuns a todas as telas
 <TelaInicial, TelaCadastrarRecebedor, TelaCadastrarPagador, TelaConsultarPagadores, TelaCadastrarItens, TelaConsultarItens, TelaEmitirRecibo>:
+    
     # cor de fundo
     canvas.before:
         Color: 
@@ -12,40 +14,60 @@
 
 # regras comuns aos botões
 <Button>:
+    background_color: rgba('#996633')
+    # força a utilizar a altura informada
     size_hint_y: None
-    height: '100dp'
+    height: '70dp'
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: '100dp'
+    # para o texto não extrapolar o tamanho do botão
     text_size: self.size
     halign: "center"
     valign: "center"
 
-# telas
+# regras das telas
 <TelaInicial>:
     BoxLayout:
         Button:
-            text: 'Cadastrar Recebedor'
-            on_press: root.manager.current = 'tela_cadastrar_recebedor'
+            text: 'Cadastrar\r\nRecebedor'
+            # root.manager é a referência ao ScreenManager no .kv
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_recebedor'
         Button:
-            text: 'Cadastrar Pagador'
-            on_press: root.manager.current = 'tela_cadastrar_pagador'
+            text: 'Cadastrar\r\nPagador'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_pagador'
         Button:
-            text: 'Consultar Pagadores'
-            on_press: root.manager.current = 'tela_consultar_pagadores'
+            text: 'Consultar\r\nPagadores'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_pagadores'
         Button:
-            text: 'Cadastrar Itens'
-            on_press: root.manager.current = 'tela_cadastrar_itens'
+            text: 'Cadastrar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_itens'
         Button:
-            text: 'Consultar Itens'
-            on_press: root.manager.current = 'tela_consultar_itens'
+            text: 'Consultar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_itens'
         Button:
-            text: 'Emitir Recibo'
-            on_press: root.manager.current = 'tela_emitir_recibo'
-
+            text: 'Emitir\r\nRecibo'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_emitir_recibo'
 
 <TelaCadastrarRecebedor>:
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Cadastrar Recebedor'
 
@@ -53,7 +75,9 @@
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Cadastrar Pagador'
 
@@ -61,7 +85,9 @@
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Consultar Pagadores'
 
@@ -69,7 +95,9 @@
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Cadastrar Itens'
 
@@ -77,7 +105,9 @@
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Consultar Pagadores'
 
@@ -85,6 +115,8 @@
     BoxLayout:
         Button:
             text: 'Voltar'
-            on_press: root.manager.current = 'tela_inicial'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
         Button:
             text: 'Fazer algo Emitir Recibo'

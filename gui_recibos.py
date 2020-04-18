@@ -1,11 +1,13 @@
 from kivy.app import App
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.core.window import Window
 
 # carrega as definições da interface gráfica
 # usei Builder.load_string com o método open, passando a codificação
 # em utf-8, pois se usar o método load_file, passando direto o arquivo
 # gui.kv, os acentos não são reconhecidos
+Window.size = (600,300)
 Builder.load_string(open("gui.kv",encoding="utf-8").read())
 
 # telas
@@ -44,6 +46,8 @@ sm.add_widget(TelaEmitirRecibo(name='tela_emitir_recibo'))
 
 class Main(App):
     def build(self):
+        self.title = "Emissor de Recibos"
+        self.icon = "icone.png"
         return sm
 
 if __name__ == '__main__':
