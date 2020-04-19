@@ -1,14 +1,26 @@
-from kivy.app import App
-from kivy.lang.builder import Builder
+# usado para bloquear o redimensionamento
+from kivy.config import Config
+# bloqueia o redimensionamento da janela, importante manter aqui
+Config.set('graphics','resizable', False)
+# gerenciador de janelas
 from kivy.uix.screenmanager import ScreenManager, Screen
+# classe principal do aplicativo
+from kivy.app import App
+# Classe para manipular a janela
 from kivy.core.window import Window
-
+# configura as medidas da janela
+Window.size = (610,300)
+# usado para carregar as definições do arquivo .kv
+from kivy.lang.builder import Builder
 # carrega as definições da interface gráfica
 # usei Builder.load_string com o método open, passando a codificação
 # em utf-8, pois se usar o método load_file, passando direto o arquivo
 # gui.kv, os acentos não são reconhecidos
-Window.size = (600,300)
 Builder.load_string(open("gui.kv",encoding="utf-8").read())
+# usado para carregar as fontes
+from kivy.core.text import LabelBase
+# carrega as fontes (fonte free para uso comercial / baixei de fontsquirrel.com)
+LabelBase.register(name = "AlexBrush", fn_regular = "fonts/AlexBrush-Regular.ttf")
 
 # telas
 class TelaInicial(Screen):
@@ -47,7 +59,7 @@ sm.add_widget(TelaEmitirRecibo(name='tela_emitir_recibo'))
 class Main(App):
     def build(self):
         self.title = "Emissor de Recibos"
-        self.icon = "icone.png"
+        self.icon = "img/icone.png"
         return sm
 
 if __name__ == '__main__':
