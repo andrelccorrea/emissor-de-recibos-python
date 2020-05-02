@@ -115,6 +115,73 @@
             text: 'Fazer algo Consultar Pagadores'
 
 <TelaCadastrarItens>:
+    FloatLayout:
+        orientation: 'horizontal'
+        # cria o label
+        Label:
+            text: 'Descrição'
+            # cor da fonte
+            color: 0, 0, 0, 1
+            # define o tamanho do texto para o tamanho do label
+            text_size: self.size
+            # alinha para a esquerda
+            halign: 'left'
+            # alinha verticalmente para o meio do label
+            valign: 'middle'
+            # com 15% de largura e 09% de altura (medida de referencia é o layout)
+            size_hint: (.15, .09)
+            # posicionando a 1% da esquerda e 90% do rodapé (referência é rodapé esquerdo (0,0))
+            pos_hint: {'x':.01, 'y':.90 }
+            # cor de fundo (para referência)
+            # canvas.before:
+            #     Color:
+            #         rgba: (.3, .6, .7, 1)
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
+        # cria o input de texto
+        TextInput:
+            # id do label
+            id: descricao
+            # texto de ajuda
+            hint_text: 'Informe a descrição do item'
+            # foco por padrão nele
+            focus: True 
+            # permite mais de uma linha
+            multiline: True
+            # com 50% de largura e 30% de altura
+            size_hint: (.50, .30)
+            # posicionado a 01% da esquerda e 61% do rodapé
+            pos_hint: {'x':.01, 'y':.61 }      
+        # cria o label
+        Label:
+            text: 'Preço'
+            # cor da fonte
+            color: 0, 0, 0, 1
+            # define o tamanho do texto para o tamanho do label
+            text_size: self.size
+            # alinha para a esquerda
+            halign: 'left'
+            # alinha verticalmente para o meio do label
+            valign: 'middle'
+            # com 15% de largura e 09% de altura (medida de referencia é o layout)
+            size_hint: (.15, .09)
+            # posicionando a 01% da esquerda e 50% do rodapé (referência é rodapé esquerdo (0,0))
+            pos_hint: {'x':.01, 'y':.50 }
+        # cria o input de números
+        TextInput:
+            # id do label
+            id: preco
+            # define o filtro para somente números
+            input_filter: 'float'
+            # texto de ajuda
+            hint_text: 'Informe o preço do item'
+            # permite mais de uma linha
+            multiline: True
+            # com 50% de largura e 10% de altura
+            size_hint: (.50, .10)
+            # posicionado a 01% da esquerda e 41% do rodapé
+            pos_hint: {'x':.01, 'y':.41 }
     BoxLayout:
         Button:
             text: 'Voltar'
@@ -122,7 +189,10 @@
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Cadastrar Itens'
+            text: 'Gravar'
+            width: '510dp'
+            on_press: if root.validar_campos() == True: root.cadastrar_item() 
+                    
 
 <TelaConsultarItens>:
     BoxLayout:
