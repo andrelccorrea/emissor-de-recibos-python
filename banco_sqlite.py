@@ -58,3 +58,17 @@ def cadastrar_recebedor(conexao, dados):
     conexao.commit()
 
     return cursor.lastrowid
+
+def cadastrar_item(conexao, dados):
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        INSERT INTO itens(
+            descricao,
+            valor
+        ) VALUES(?,?)
+    ''', dados)
+
+    conexao.commit()
+
+    return cursor.lastrowid

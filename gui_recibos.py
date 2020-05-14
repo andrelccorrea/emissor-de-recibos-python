@@ -23,6 +23,12 @@ from kivy.core.text import LabelBase
 LabelBase.register(name = "AlexBrush", fn_regular = "fonts/AlexBrush-Regular.ttf")
 # usa StringProperty para carregar dados dinamicamente
 from kivy.properties import StringProperty
+# banco de dados
+import sqlite3
+import banco_sqlite as banco
+# mensagens em popup
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 
 # telas
 class TelaInicial(Screen):
@@ -41,10 +47,34 @@ class TelaConsultarPagadores(Screen):
     pass
 
 class TelaCadastrarItens(Screen):
-    pass
+    def exibir_popup_do_erro(self):
+        pop = Popup(title='Campos inválidos',
+                    content=Label(text='Preencha corretamente todos os campos.'),
+                    size_hint=(None, None), size=(350, 120))
+        pop.open()
+
+    def validar_campos(self):
+        if not self.ids.descricao.text or not self.ids.preco.text or float(self.ids.preco.text) <= 0:
+            self.exibir_popup_do_erro()        
+            return False
+        return True
+
+    def cadastrar_item(self):
+        # abre uma conexão com o banco
+        conexao = sqlite3.connect("recibos.db")
+        # junta os dados do form
+        dados = [self.ids.descricao.text, self.ids.preco.text]
+        # grava os dados
+        banco.cadastrar_item(conexao, dados)
+        # limpa os campos
+        self.ids.descricao.text = ""
+        self.ids.preco.text = ""
+        # fecha a conexão com o banco
+        conexao.close()
+        return
 
 class TelaConsultarItens(Screen):
-    pass
+    pass    
 
 class TelaEmitirRecibo(Screen):
     pass
