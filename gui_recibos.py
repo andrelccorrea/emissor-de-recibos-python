@@ -9,7 +9,7 @@ from kivy.app import App
 # Classe para manipular a janela
 from kivy.core.window import Window
 # configura as medidas da janela
-Window.size = (610,300)
+Window.size = (800,600)
 # usado para carregar as definições do arquivo .kv
 from kivy.lang.builder import Builder
 # carrega as definições da interface gráfica
@@ -21,12 +21,17 @@ Builder.load_string(open("gui.kv",encoding="utf-8").read())
 from kivy.core.text import LabelBase
 # carrega as fontes (fonte free para uso comercial / baixei de fontsquirrel.com)
 LabelBase.register(name = "AlexBrush", fn_regular = "fonts/AlexBrush-Regular.ttf")
+# usa StringProperty para carregar dados dinamicamente
+from kivy.properties import StringProperty
 
 # telas
 class TelaInicial(Screen):
-    pass
+    # carregar do banco
+    nome_do_recebedor = StringProperty("Nome do Recebedor")
+    # carregar conforme configuração
+    logo = StringProperty("img/inicio.png")
 
-class TelaCadastrarRecebedor(Screen):
+class TelaConfiguracoes(Screen):
     pass
 
 class TelaCadastrarPagador(Screen):
@@ -49,7 +54,7 @@ class TelaEmitirRecibo(Screen):
 # são usados no arquivo gui.kv para navegação
 sm = ScreenManager()
 sm.add_widget(TelaInicial(name='tela_inicial'))
-sm.add_widget(TelaCadastrarRecebedor(name='tela_cadastrar_recebedor'))
+sm.add_widget(TelaConfiguracoes(name='tela_configuracoes'))
 sm.add_widget(TelaCadastrarPagador(name='tela_cadastrar_pagador'))
 sm.add_widget(TelaConsultarPagadores(name='tela_consultar_pagadores'))
 sm.add_widget(TelaCadastrarItens(name='tela_cadastrar_itens'))

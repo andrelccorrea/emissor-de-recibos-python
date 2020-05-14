@@ -3,143 +3,324 @@
 #:import rgba kivy.utils.rgba
 
 # regras comuns a todas as telas
-<TelaInicial, TelaCadastrarRecebedor, TelaCadastrarPagador, TelaConsultarPagadores, TelaCadastrarItens, TelaConsultarItens, TelaEmitirRecibo>:
+<TelaInicial, TelaConfiguracoes, TelaCadastrarPagador, TelaConsultarPagadores, TelaCadastrarItens, TelaConsultarItens, TelaEmitirRecibo>:
     # cor de fundo
     canvas.before:
         Color: 
-            rgba: rgba('#cc80ff')
+            rgba: rgba('#c38bbf')
         Rectangle:
             pos: self.pos
             size: self.size
 
-# regras comuns aos botões
+# regras comuns aos botões de todas as telas
 <Button>:
-    background_color: rgba('#996633')
+    background_color: rgba('#973e95')
     # força a utilizar a altura informada
     size_hint_y: None
-    height: '70dp'
+    height: dp(50)
     # força a utilizar a largura informada
     size_hint_x: None
-    width: '100dp'
+    width: dp(100)
     # para o texto não extrapolar o tamanho do widget
     text_size: self.size
     halign: "center"
     valign: "center"
 
+# regras comuns aos text_inputs de todas as telas
+<TextInput>:
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(30)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(200)
+
 # regras das telas
 <TelaInicial>:
+    Image:
+        id: img_logo
+        source: root.logo
+        size_hint: None, None
+        size: 200, 200
+        # posiciona a imagem em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.80}
+    Label:
+        id: lbl_nome_do_recebedor
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(90)
+        color: rgba('#3e2f3d')
+        # carrega o texto
+        text: root.nome_do_recebedor
+        # text_size limita o tamanho do texto
+        text_size: self.size
+        size_hint: .8, .5
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'top'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.35}
     BoxLayout:
-        orientation: 'vertical'
-        FloatLayout:
-            Image: 
-                source: 'img/inicio.png'
-                size_hint_x: None
-                width: '150dp'
-                height: '150dp'
-                pos: 0, 120
-            Label:
-                # trava o comprimento em 400dp
-                text_size: 420, None
-                # ajusta o tamanho do label de acordo com a quantidade de texto
-                size: self.texture_size
-                text: '12345678901234567890123456790'
-                # alinha o texto ao centro do label
-                halign: 'center'
-                # fonte baixada e configurada no arquivo .py
-                font_name: 'AlexBrush'
-                font_size: '65dp'
-                pos: 40, 110
-        BoxLayout:
-            spacing: '2dp'
-            orientation: 'horizontal'
-            Button:
-                text: 'Cadastrar\r\nRecebedor'
-                # root.manager é a referência ao ScreenManager no .kv
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_cadastrar_recebedor'
-            Button:
-                text: 'Cadastrar\r\nPagador'
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_cadastrar_pagador'
-            Button:
-                text: 'Consultar\r\nPagadores'
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_consultar_pagadores'
-            Button:
-                text: 'Cadastrar\r\nItens'
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_cadastrar_itens'
-            Button:
-                text: 'Consultar\r\nItens'
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_consultar_itens'
-            Button:
-                text: 'Emitir\r\nRecibo'
-                on_press:
-                    root.manager.transition.direction = 'left'
-                    root.manager.current = 'tela_emitir_recibo'
-
-<TelaCadastrarRecebedor>:
-    BoxLayout:
+        id: box_botoes
+        size_hint: None, None
+        height: 50
+        spacing: dp(2)
+        orientation: 'horizontal'
         Button:
+            id: "configuracoes"
+            text: 'Configuracoes'
+            width: dp(120)
+            # root.manager é a referência ao ScreenManager no .kv
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_configuracoes'
+        Button:
+            id: "cadastrar_pagador"
+            text: 'Cadastrar\r\nPagador'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_pagador'
+        Button:
+            id: "consultar_pagadores"
+            text: 'Consultar\r\nPagadores'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_pagadores'
+        Button:
+            id: "cadastrar_itens"
+            text: 'Cadastrar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_itens'
+        Button:
+            id: "consultar_itens"
+            text: 'Consultar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_itens'
+        Button:
+            id: "emitir_recibo"
+            text: 'Emitir\r\nRecibo'
+            width: 270
+            on_press:
+                # direção da transição
+                root.manager.transition.direction = 'left'
+                # vai para a tela
+                root.manager.current = 'tela_emitir_recibo'
+
+<TelaConfiguracoes>:
+    Label:
+        id: lbl_nome_da_tela
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(65)
+        color: rgba('#3e2f3d')
+        text: 'Configurações'
+        # text_size limita o tamanho do texto
+        # sendo a largura da tela (root) - 300 x 300
+        text_size: self.size
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'center'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.92}
+    Label:
+        id: lbl_nome
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Nome'
+        pos_hint: { 'x':.02 , 'center_y':.80 }
+    TextInput:
+        id: txt_nome
+        multiline: False
+        pos_hint: { 'x':.02, 'center_y':.76 }
+    Label:
+        id: lbl_cpf
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'CPF'
+        pos_hint: { 'x':.02 , 'center_y':.70 }
+    TextInput:
+        id: txt_cpf
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.66 }
+    Label:
+        id: lbl_endereco
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Endereço'
+        pos_hint: { 'x':.02 , 'center_y':.60 }
+    TextInput:
+        id: txt_endereco
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.56 }
+    Label:
+        id: lbl_bairro
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Bairro'
+        pos_hint: { 'x':.02 , 'center_y':.50 }
+    TextInput:
+        id: txt_bairro
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.46 }
+    Label:
+        id: lbl_cidade
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Cidade'
+        pos_hint: { 'x':.02 , 'center_y':.40 }
+    TextInput:
+        id: txt_cidade
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.36 }
+    Label:
+        id: lbl_uf
+        size_hint: .03, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'UF'
+        pos_hint: { 'x':.02 , 'center_y':.30 }
+    TextInput:
+        id: txt_uf
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.26 }
+    Label:
+        id: lbl_telefone
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Telefone'
+        pos_hint: { 'x':.02 , 'center_y':.20 }
+    TextInput:
+        id: txt_telefone
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.16 }
+    Label:
+        id: lbl_logo
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Logotipo'
+        pos_hint: { 'x':.5 , 'center_y':.80 }
+    #https://stackoverflow.com/questions/44103447/how-to-get-folder-path-with-filechooser-on-kivy
+    # FileChooserIconView:
+    #     size_hint: .1, .5
+    #     pos_hint: { 'x':.5 , 'center_y':.76 }
+    BoxLayout:
+        id: box_botoes
+        # força a utilizar a altura informada
+        size_hint_y: None
+        height: dp(50)
+        Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Cadastrar Recebedor'
+            id: gravar
+            width: root.width - voltar.width
+            text: 'Gravar'
 
 <TelaCadastrarPagador>:
     BoxLayout:
         Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Cadastrar Pagador'
+            id: gravar
+            width: root.width - voltar.width
+            text: 'Gravar'
 
 <TelaConsultarPagadores>:
     BoxLayout:
         Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
+            width: root.width - voltar.width
             text: 'Fazer algo Consultar Pagadores'
 
 <TelaCadastrarItens>:
     BoxLayout:
         Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
+            id: gravar
+            width: root.width - voltar.width
             text: 'Fazer algo Cadastrar Itens'
 
 <TelaConsultarItens>:
     BoxLayout:
         Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Consultar Pagadores'
+            width: root.width - voltar.width
+            text: 'Fazer algo Consultar Itens'
 
 <TelaEmitirRecibo>:
     BoxLayout:
         Button:
+            id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
-            text: 'Fazer algo Emitir Recibo'
+            id: imprimir
+            width: root.width - voltar.width
+            text: 'Imprimir'
