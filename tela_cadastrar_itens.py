@@ -20,15 +20,18 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 
 class TelaCadastrarItens(Screen):
-    def exibir_popup_do_erro(self):
-        pop = Popup(title='Campos inválidos',
-                    content=Label(text='Preencha corretamente todos os campos.'),
+    def exibir_popup(self, titulo, mensagem):
+        pop = Popup(title=titulo,
+                    content=Label(text=mensagem),
                     size_hint=(None, None), size=(350, 120))
         pop.open()
 
     def validar_campos(self):
-        if not self.ids.descricao.text or not self.ids.preco.text or float(self.ids.preco.text) <= 0:
-            self.exibir_popup_do_erro()        
+        if not self.ids.txt_descricao.text:
+            self.exibir_popup('Campos inválidos','Preencha corretamente a descrição do item.')        
+            return False
+        elif not self.ids.txt_preco.text or float(self.ids.txt_preco.text) <= 0:
+            self.exibir_popup('Campos inválidos','Preencha corretamente o preço do item.')        
             return False
         return True
 
@@ -36,12 +39,14 @@ class TelaCadastrarItens(Screen):
         # abre uma conexão com o banco
         conexao = sqlite3.connect("recibos.db")
         # junta os dados do form
-        dados = [self.ids.descricao.text, self.ids.preco.text]
+        dados = [self.ids.txt_descricao.text, self.ids.txt_preco.text]
         # grava os dados
         banco.cadastrar_item(conexao, dados)
         # limpa os campos
-        self.ids.descricao.text = ""
-        self.ids.preco.text = ""
+        self.ids.txt_descricao.text = ""
+        self.ids.txt_preco.text = ""
         # fecha a conexão com o banco
         conexao.close()
+        self.exibir_popup('Cadastro','Item cadastrado com sucesso!')
+        #self.super(TelaConsultarItens, self).atualizar_lista()
         return

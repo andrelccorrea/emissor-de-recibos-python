@@ -59,6 +59,21 @@ def cadastrar_recebedor(conexao, dados):
 
     return cursor.lastrowid
 
+def cadastrar_pagador(conexao, dados):
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        INSERT INTO pagadores(
+            nome,
+            cpf,
+            telefone
+        ) VALUES(?,?,?)
+    ''', dados)
+
+    conexao.commit()
+
+    return cursor.lastrowid
+
 def cadastrar_item(conexao, dados):
     cursor = conexao.cursor()
 

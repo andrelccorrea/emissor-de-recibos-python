@@ -25,6 +25,22 @@
     size_hint_x: None
     width: dp(500)
 
+<TableHeaderLabel>:
+    canvas.before:
+        Color:
+            rgba: rgba('#735771')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TableRowLabel>:
+    canvas.before:
+        Color:
+            rgba: rgba('#3e2f3d')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 <TelaConsultarPagadores>:
     # cor de fundo
     canvas.before:
@@ -33,13 +49,67 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    Label:
+        id: lbl_nome_da_tela
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(65)
+        color: rgba('#3e2f3d')
+        text: 'Consultar Pagadores'
+        # text_size limita o tamanho do texto
+        # sendo a largura da tela (root) - 300 x 300
+        text_size: self.size
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'center'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.92}
+
     BoxLayout:
+        orientation: "vertical"
+        size_hint_y: .76
+        pos_hint: { 'y': .09 }
+
+        GridLayout:
+            size_hint: 1, None
+            size_hint_y: None
+            height: 25
+            cols: 3
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Nome"
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "CPF"
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Telefone"
+
+        BoxLayout:
+            RecycleView:
+                viewclass: 'TableRowLabel'
+                data: [{'text': str(x)} for x in root.data_items]
+                SelectableRecycleGridLayout:
+                    cols: 3
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    multiselect: False
+                    touch_multiselect: False
+    BoxLayout:
+        id: box_botoes
+        # força a utilizar a altura informada
+        size_hint_y: None
+        height: dp(50)
         Button:
             id: voltar
             text: 'Voltar'
             on_press: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
-        Button:
-            width: root.width - voltar.width
-            text: 'Fazer algo Consultar Pagadores'
