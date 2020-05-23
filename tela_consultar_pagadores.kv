@@ -1,0 +1,45 @@
+#:kivy 1.11
+# converte as cores de HEX para o padrão rgba float do kivy
+#:import rgba kivy.utils.rgba
+
+# padrão para os Buttons dessa tela
+<Button>:
+    background_color: rgba('#973e95')
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(50)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(100)
+    # para o texto não extrapolar o tamanho do widget
+    text_size: self.size
+    halign: "center"
+    valign: "center"
+
+# padrão para os TextInputs dessa tela
+<TextInput>:
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(30)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(500)
+
+<TelaConsultarPagadores>:
+    # cor de fundo
+    canvas.before:
+        Color: 
+            rgba: rgba('#c38bbf')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        Button:
+            id: voltar
+            text: 'Voltar'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
+        Button:
+            width: root.width - voltar.width
+            text: 'Fazer algo Consultar Pagadores'

@@ -1,0 +1,101 @@
+#:kivy 1.11
+# converte as cores de HEX para o padrão rgba float do kivy
+#:import rgba kivy.utils.rgba
+
+<Button>:
+    background_color: rgba('#973e95')
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(50)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(100)
+    # para o texto não extrapolar o tamanho do widget
+    text_size: self.size
+    halign: "center"
+    valign: "center"
+
+<TelaInicial>:
+    # cor de fundo
+    canvas.before:
+        Color: 
+            rgba: rgba('#c38bbf')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Image:
+        id: img_logo
+        source: root.logo
+        size_hint: None, None
+        size: 200, 200
+        # posiciona a imagem em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.80}
+    Label:
+        id: lbl_nome_do_recebedor
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(90)
+        color: rgba('#3e2f3d')
+        # carrega o texto
+        text: root.nome_do_recebedor
+        # text_size limita o tamanho do texto
+        text_size: self.size
+        size_hint: .8, .5
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'top'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.35}
+    BoxLayout:
+        id: box_botoes
+        size_hint: None, None
+        height: 50
+        spacing: dp(2)
+        orientation: 'horizontal'
+        Button:
+            id: "configuracoes"
+            text: 'Configurações'
+            width: dp(120)
+            # root.manager é a referência ao ScreenManager no .kv
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_configuracoes'
+        Button:
+            id: "cadastrar_pagador"
+            text: 'Cadastrar\r\nPagador'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_pagador'
+        Button:
+            id: "consultar_pagadores"
+            text: 'Consultar\r\nPagadores'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_pagadores'
+        Button:
+            id: "cadastrar_itens"
+            text: 'Cadastrar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_cadastrar_itens'
+        Button:
+            id: "consultar_itens"
+            text: 'Consultar\r\nItens'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tela_consultar_itens'
+        Button:
+            id: "emitir_recibo"
+            text: 'Emitir\r\nRecibo'
+            width: 270
+            on_press:
+                # direção da transição
+                root.manager.transition.direction = 'left'
+                # vai para a tela
+                root.manager.current = 'tela_emitir_recibo'

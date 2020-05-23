@@ -1,0 +1,174 @@
+#:kivy 1.11
+# converte as cores de HEX para o padrão rgba float do kivy
+#:import rgba kivy.utils.rgba
+
+# padrão para os Buttons dessa tela
+<Button>:
+    background_color: rgba('#973e95')
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(50)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(100)
+    # para o texto não extrapolar o tamanho do widget
+    text_size: self.size
+    halign: "center"
+    valign: "center"
+
+# padrão para os TextInputs dessa tela
+<TextInput>:
+    # força a utilizar a altura informada
+    size_hint_y: None
+    height: dp(30)
+    # força a utilizar a largura informada
+    size_hint_x: None
+    width: dp(500)
+
+# TODO: adicionar campo para carregar o logo usando FileChooser
+# configurar tamanho dos TextInputs
+# gerenciar o foco
+# gerenciar navegação
+# validar dados (py)
+# conectar com o banco (py)
+
+<TelaConfiguracoes>:
+    # cor de fundo
+    canvas.before:
+        Color: 
+            rgba: rgba('#c38bbf')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        id: lbl_nome_da_tela
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(65)
+        color: rgba('#3e2f3d')
+        text: 'Configurações'
+        # text_size limita o tamanho do texto
+        # sendo a largura da tela (root) - 300 x 300
+        text_size: self.size
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'center'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.92}
+    Label:
+        id: lbl_nome
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Nome'
+        pos_hint: { 'x':.02 , 'center_y':.80 }
+    TextInput:
+        id: txt_nome
+        multiline: False
+        pos_hint: { 'x':.02, 'center_y':.76 }
+    Label:
+        id: lbl_cpf
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'CPF'
+        pos_hint: { 'x':.02 , 'center_y':.70 }
+    TextInput:
+        id: txt_cpf
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.66 }
+    Label:
+        id: lbl_endereco
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Endereço'
+        pos_hint: { 'x':.02 , 'center_y':.60 }
+    TextInput:
+        id: txt_endereco
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.56 }
+    Label:
+        id: lbl_bairro
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Bairro'
+        pos_hint: { 'x':.02 , 'center_y':.50 }
+    TextInput:
+        id: txt_bairro
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.46 }
+    Label:
+        id: lbl_cidade
+        size_hint: .06, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Cidade'
+        pos_hint: { 'x':.02 , 'center_y':.40 }
+    TextInput:
+        id: txt_cidade
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.36 }
+    Label:
+        id: lbl_uf
+        size_hint: .03, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'UF'
+        pos_hint: { 'x':.02 , 'center_y':.30 }
+    TextInput:
+        id: txt_uf
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.26 }
+    Label:
+        id: lbl_telefone
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Telefone'
+        pos_hint: { 'x':.02 , 'center_y':.20 }
+    TextInput:
+        id: txt_telefone
+        multiline: False
+        pos_hint: { 'x':.02 , 'center_y':.16 }
+    BoxLayout:
+        id: box_botoes
+        # força a utilizar a altura informada
+        size_hint_y: None
+        height: dp(50)
+        Button:
+            id: voltar
+            text: 'Voltar'
+            on_press: 
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tela_inicial'
+        Button:
+            id: gravar
+            width: root.width - voltar.width
+            text: 'Gravar'
