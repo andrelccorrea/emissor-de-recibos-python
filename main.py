@@ -1,9 +1,16 @@
 # gerenciador de janelas
 from kivy.uix.screenmanager import ScreenManager
+
 # classe principal do aplicativo
 from kivy.app import App
+
 # usado para carregar as fontes
 from kivy.core.text import LabelBase
+
+# cria o banco de dados
+from sqlite3 import connect
+from banco_sqlite import cria_banco
+
 #carrega as telas de seus respectivos arquivos
 from tela_inicial import TelaInicial
 from tela_configuracoes import TelaConfiguracoes
@@ -12,6 +19,11 @@ from tela_consultar_pagadores import TelaConsultarPagadores
 from tela_cadastrar_itens import TelaCadastrarItens
 from tela_consultar_itens import TelaConsultarItens
 from tela_emitir_recibo import TelaEmitirRecibo
+
+# cria o banco se não existir
+# deve ficar antes de adicionar as telas ao ScreenManager
+conexao = connect("recibos.db")
+cria_banco( conexao )
 
 # cria o gerenciador de telas e adiciona as telas
 # atenção aos nomes passados como parâmetro, pois

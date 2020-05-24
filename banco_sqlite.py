@@ -1,5 +1,3 @@
-import sqlite3
-
 def cria_banco(conexao):
     cursor = conexao.cursor()
 
