@@ -11,5 +11,31 @@ from kivy.lang.builder import Builder
 # gui.kv, os acentos não são reconhecidos
 Builder.load_string(open("tela_configuracoes.kv",encoding="utf-8").read())
 
-class TelaConfiguracoes(Screen):
+# usado para instanciar os TextInputs
+from kivy.uix.textinput import TextInput
+
+class TextInputNome(TextInput):
+    def on_parent(self, widget, parent):
+        self.focus = True
+
+class TextInputCpf(TextInput):
     pass
+
+class TextInputEndereco(TextInput):
+    pass
+
+class TextInputBairro(TextInput):
+    pass
+
+class TextInputCidade(TextInput):
+    pass
+
+class TextInputUf(TextInput):
+    pass
+
+class TextInputTelefone(TextInput):
+    pass
+
+class TelaConfiguracoes(Screen):
+    def build(self):
+        return TextInputNome()

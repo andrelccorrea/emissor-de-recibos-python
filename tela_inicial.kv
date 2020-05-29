@@ -63,15 +63,17 @@
             text: 'Configurações'
             width: dp(120)
             # root.manager é a referência ao ScreenManager no .kv
-            on_press:
+            on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'tela_configuracoes'
+                root.manager.get_screen("tela_configuracoes").ids["txt_nome"].focus = True
         Button:
             id: "cadastrar_pagador"
             text: 'Cadastrar\r\nPagador'
-            on_press:
+            on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'tela_cadastrar_pagador'
+                root.manager.get_screen("tela_cadastrar_pagador").ids["txt_nome"].focus = True
         Button:
             id: "consultar_pagadores"
             text: 'Consultar\r\nPagadores'
@@ -81,9 +83,10 @@
         Button:
             id: "cadastrar_itens"
             text: 'Cadastrar\r\nItens'
-            on_press:
+            on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'tela_cadastrar_itens'
+                root.manager.get_screen("tela_cadastrar_itens").ids["txt_descricao"].focus = True
         Button:
             id: "consultar_itens"
             text: 'Consultar\r\nItens'
