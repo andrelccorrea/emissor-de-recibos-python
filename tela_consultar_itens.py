@@ -47,11 +47,9 @@ class TelaConsultarItens(Screen):
         
         conexao.close()
 
+        self.data_items = []
+
         self.data_items.clear()
         for row in rows:
             for col in row:
-                self.data_items.append(col) 
-
-    def atualizar_lista(self): 
-        self.retornar_itens()
-        self.refresh_from_data(self.data_items) 
+                self.data_items.append(col)

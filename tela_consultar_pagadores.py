@@ -46,7 +46,9 @@ class TelaConsultarPagadores(Screen):
         cursor.execute("SELECT nome,cpf,telefone FROM pagadores ORDER BY pagador_id ASC")
         rows = cursor.fetchall()
 
+        self.data_items = []
+        
         # create data_items
         for row in rows:
             for col in row:
-                self.data_items.append(col)  
+                self.data_items.append(col)

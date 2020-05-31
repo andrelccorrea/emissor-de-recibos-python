@@ -77,9 +77,10 @@
         Button:
             id: "consultar_pagadores"
             text: 'Consultar\r\nPagadores'
-            on_press:
+            on_release:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'tela_consultar_pagadores'
+                root.manager.get_screen("tela_consultar_pagadores").retornar_pagadores()
         Button:
             id: "cadastrar_itens"
             text: 'Cadastrar\r\nItens'
@@ -93,6 +94,7 @@
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'tela_consultar_itens'
+                root.manager.get_screen("tela_consultar_itens").retornar_itens()
         Button:
             id: "emitir_recibo"
             text: 'Emitir\r\nRecibo'
