@@ -1,7 +1,7 @@
 # gerenciador de janelas
 from kivy.uix.screenmanager import Screen
-# usa StringProperty para carregar dados dinamicamente
-from kivy.properties import StringProperty, ListProperty
+# usa ListProperty para carregar dados dinamicamente
+from kivy.properties import ListProperty
 # banco de dados
 import sqlite3
 import banco_sqlite as banco
@@ -46,8 +46,6 @@ class TelaConsultarItens(Screen):
         rows = cursor.fetchall()
         
         conexao.close()
-
-        self.data_items = []
 
         self.data_items.clear()
         for row in rows:

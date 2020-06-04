@@ -1,2 +1,4 @@
 __pycache__/
 recibos.db
+emissor-de-recibos-python.code-workspace
+__pycache__/banco_sqlite.cpython-37.pyc

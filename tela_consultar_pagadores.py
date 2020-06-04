@@ -1,7 +1,7 @@
 # gerenciador de janelas
 from kivy.uix.screenmanager import Screen
-# usa StringProperty para carregar dados dinamicamente
-from kivy.properties import StringProperty, ListProperty
+# usa ListProperty para carregar dados dinamicamente
+from kivy.properties import ListProperty
 # banco de dados
 import sqlite3
 import banco_sqlite as banco
@@ -45,10 +45,8 @@ class TelaConsultarPagadores(Screen):
 
         cursor.execute("SELECT nome,cpf,telefone FROM pagadores ORDER BY pagador_id ASC")
         rows = cursor.fetchall()
-
-        self.data_items = []
         
-        # create data_items
+        self.data_items.clear()
         for row in rows:
             for col in row:
                 self.data_items.append(col)

@@ -2,6 +2,7 @@
 from kivy.uix.screenmanager import Screen
 # usa StringProperty para carregar dados dinamicamente
 from kivy.properties import StringProperty
+from kivy.utils import get_color_from_hex
 
 # usado para carregar as definições do arquivo .kv
 from kivy.lang.builder import Builder
@@ -19,19 +20,23 @@ import banco_sqlite as banco
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 
+class PopupLabel(Label):
+    pass
+
 class TelaCadastrarItens(Screen):
     def exibir_popup(self, titulo, mensagem):
         pop = Popup(title=titulo,
                     content=Label(text=mensagem),
-                    size_hint=(None, None), size=(350, 120))
+                    size_hint=(None, None), 
+                    size=(350, 120))
         pop.open()
 
     def validar_campos(self):
         if not self.ids.txt_descricao.text:
-            self.exibir_popup('Campos inválidos','Preencha corretamente a descrição do item.')        
+            self.exibir_popup('Campo inválido','Preencha corretamente a descrição do item.')        
             return False
         elif not self.ids.txt_preco.text or float(self.ids.txt_preco.text) <= 0:
-            self.exibir_popup('Campos inválidos','Preencha corretamente o preço do item.')        
+            self.exibir_popup('Campo inválido','Preencha corretamente o preço do item.')        
             return False
         return True
 
@@ -48,5 +53,4 @@ class TelaCadastrarItens(Screen):
         # fecha a conexão com o banco
         conexao.close()
         self.exibir_popup('Cadastro','Item cadastrado com sucesso!')
-        #self.super(TelaConsultarItens, self).atualizar_lista()
         return

@@ -81,6 +81,7 @@
     TextInput:
         id: txt_preco
         multiline: False
+        size_hint_x: .18
         # define o filtro para somente números
         input_filter: 'float'
         pos_hint: { 'x':.02 , 'center_y':.52 }
@@ -88,11 +89,11 @@
         Button:
             id: voltar
             text: 'Voltar'
-            on_press: 
+            on_release: 
                 root.manager.transition.direction = 'right'
                 root.manager.current = 'tela_inicial'
         Button:
             id: gravar
             width: root.width - voltar.width
             text: 'Gravar'
-            on_press: if root.validar_campos() == True: root.cadastrar_item()
+            on_release: if root.validar_campos() == True: root.cadastrar_item()

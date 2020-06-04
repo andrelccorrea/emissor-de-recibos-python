@@ -27,7 +27,7 @@ class CPFInput(TextInput):
     def insert_text(self, substring, from_undo=False):
         if not substring.isnumeric() or len(self.text) > 13:
             return
-        elif len(self.text) == 3:
+        if len(self.text) == 3:
             substring = "." + substring
         elif len(self.text) == 7:
             substring = "." + substring
@@ -39,7 +39,7 @@ class TelefoneInput(TextInput):
     def insert_text(self, substring, from_undo=False):
         if not substring.isnumeric() or len(self.text) > 12:
             return
-        elif len(self.text) == 0:
+        if len(self.text) == 0:
             substring = "(" + substring
         elif len(self.text) == 3:
             substring = ")" + substring
@@ -54,28 +54,29 @@ class TelaCadastrarPagadores(Screen):
 
     def validar_campos(self):
         if not self.ids.txt_nome.text:
-            self.exibir_popup('Campos inválidos','Preencha corretamente o nome.')        
+            self.exibir_popup('Campo inválido','Preencha corretamente o nome.')        
             return False
         elif not self.ids.txt_cpf.text:
-            self.exibir_popup('Campos inválidos','Preencha corretamente o CPF.')        
+            self.exibir_popup('Campo inválido','Preencha corretamente o CPF.')        
             return False
         return True
 
     def cadastrar_pagador(self):
-        
-        # TODO: ainda falta validar se já tem cadastro
-
         # abre uma conexão com o banco
         conexao = sqlite3.connect("recibos.db")
-        # junta os dados do form
-        dados = [self.ids.txt_nome.text, self.ids.txt_cpf.text, self.ids.txt_telefone.text]
-        # grava os dados
-        banco.cadastrar_pagador(conexao, dados)
-        # limpa os campos
-        self.ids.txt_nome.text = ""
-        self.ids.txt_cpf.text = ""
-        self.ids.txt_telefone.text = ""
-        # fecha a conexão com o banco
-        conexao.close()
-        self.exibir_popup('Cadastro','Pagador cadastrado com sucesso!')
+
+        if banco.verificar_pagador(conexao, self.ids.txt_cpf.text) == 0:
+            # junta os dados do form
+            dados = [self.ids.txt_nome.text, self.ids.txt_cpf.text, self.ids.txt_telefone.text]
+            # grava os dados
+            banco.cadastrar_pagador(conexao, dados)
+            # limpa os campos
+            self.ids.txt_nome.text = ""
+            self.ids.txt_cpf.text = ""
+            self.ids.txt_telefone.text = ""
+            # fecha a conexão com o banco
+            conexao.close()
+            self.exibir_popup('Cadastro','Pagador cadastrado com sucesso!')
+        else:
+            self.exibir_popup('Atenção','Pagador já cadastrado!')
         return

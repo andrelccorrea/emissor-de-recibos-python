@@ -72,6 +72,11 @@ def cadastrar_pagador(conexao, dados):
 
     return cursor.lastrowid
 
+def verificar_pagador(conexao, cpf):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT COUNT(cpf) FROM pagadores WHERE cpf=?;", [cpf] )
+    return cursor.fetchone()[0]
+
 def cadastrar_item(conexao, dados):
     cursor = conexao.cursor()
 
