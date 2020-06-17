@@ -23,6 +23,10 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 
 # inputs
+class TextInputNome(TextInput):
+    def on_parent(self, widget, parent):
+        self.focus = True
+
 class CPFInput(TextInput):
     def insert_text(self, substring, from_undo=False):
         if not substring.isnumeric() or len(self.text) > 13:
@@ -65,7 +69,7 @@ class TelaCadastrarPagadores(Screen):
         # abre uma conexão com o banco
         conexao = sqlite3.connect("recibos.db")
 
-        if banco.verificar_pagador(conexao, self.ids.txt_cpf.text) == 0:
+        if banco.buscar_pagador(conexao, self.ids.txt_cpf.text) == 0:
             # junta os dados do form
             dados = [self.ids.txt_nome.text, self.ids.txt_cpf.text, self.ids.txt_telefone.text]
             # grava os dados

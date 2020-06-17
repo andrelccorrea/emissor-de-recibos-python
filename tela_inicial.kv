@@ -59,14 +59,14 @@
         spacing: dp(2)
         orientation: 'horizontal'
         Button:
-            id: "configuracoes"
-            text: 'Configurações'
+            id: "cadastrar_recebedor"
+            text: 'Cadastrar\r\nRecebedor'
             width: dp(120)
             # root.manager é a referência ao ScreenManager no .kv
             on_release:
                 root.manager.transition.direction = 'left'
-                root.manager.current = 'tela_configuracoes'
-                root.manager.get_screen("tela_configuracoes").ids["txt_nome"].focus = True
+                root.manager.current = 'tela_cadastrar_recebedor'
+                root.manager.get_screen("tela_cadastrar_recebedor").ids["txt_nome"].focus = True
         Button:
             id: "cadastrar_pagador"
             text: 'Cadastrar\r\nPagador'

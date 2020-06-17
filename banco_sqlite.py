@@ -57,6 +57,11 @@ def cadastrar_recebedor(conexao, dados):
 
     return cursor.lastrowid
 
+def retornar_recebedor(conexao):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM recebedores;")
+    return cursor.fetchone()[0]
+
 def cadastrar_pagador(conexao, dados):
     cursor = conexao.cursor()
 
@@ -72,7 +77,7 @@ def cadastrar_pagador(conexao, dados):
 
     return cursor.lastrowid
 
-def verificar_pagador(conexao, cpf):
+def buscar_pagador(conexao, cpf):
     cursor = conexao.cursor()
     cursor.execute("SELECT COUNT(cpf) FROM pagadores WHERE cpf=?;", [cpf] )
     return cursor.fetchone()[0]
