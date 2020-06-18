@@ -29,12 +29,17 @@ Builder.load_string(open("tela_cadastrar_recebedor.kv",encoding="utf-8").read())
 
 ################################################################################
 # TODO: validar campos ao passar para o próximo
+
 #       mudar cor do campo na validação
-#       validar e formatar o telefone
+
 #       preencher campos ao entrar na tela
-#       criar rotina para permitir apenas 1 cadastro de recebedor, sempre sobrescrevendo
+
+#       criar rotina para permitir apenas 1 cadastro de recebedor, sempre sobrescrevendo ?
+
 #       criar rotina na inicialização do programa para direcionar para esta tela caso não 
 #       haja nenhum recebedor cadastrado
+
+#       adicionar um dropdown ou list para selecionar a UF
 
 class TextInputNome(TextInput):
     pass
@@ -74,16 +79,14 @@ class TextInputTelefone(TextInput):
         if not substring.isnumeric():
             substring = ""
 
-        #texto_completo = self.text + substring
-        # if len(texto_completo) == 11:
-        #     if uteis.validar_cpf(texto_completo):
-        #         self.text = uteis.formatar_cpf(texto_completo)
-        #         #self.cursor = (len(self.text), 0)
-        #         self.do_cursor_movement("cursor_end")
-        #         substring = ""
-        # elif len(texto_completo) > 14:
-        #     self.text = texto_completo[0:14]
-        #     substring = ""
+        texto_completo = self.text + substring
+        if len(texto_completo) == 11:
+            self.text = uteis.formatar_telefone(texto_completo)
+            self.do_cursor_movement("cursor_end")
+            substring = ""
+        elif len(texto_completo) > 14:
+            self.text = texto_completo[0:14]
+            substring = ""
         
         return super().insert_text(substring, from_undo=from_undo)
 
@@ -100,8 +103,15 @@ class TelaCadastrarRecebedor(Screen):
         pop.open()
 
     def validar_campos(self):
-        # todo: validar campos com loop
-        pass
+        # percorre o dicionário de ids referente aos widgets e filtra
+        # os TextInputs com prefixo txt_, verificando se estão vazios
+        for item in self.ids:
+            if "txt_" in item:
+                if not self.ids[item].text:
+                    self.ids[item].focus = True
+                    self.exibir_popup('Campo inválido', 'Preencha corretamente o ' + item + '.')
+                    return False
+        return True
 
     def cadastrar_recebedor(self):
         # abre uma conexão com o banco

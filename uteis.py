@@ -9,7 +9,7 @@ def validar_telefone( telefone ):
   pass
 
 def formatar_telefone( telefone ):
-  pass
+  return '({}){}-{}'.format(telefone[:2], telefone[2:7], telefone[7:11])
 
 def validar_cpf(cpf: str) -> bool:
   # Verifica a formatação do CPF
