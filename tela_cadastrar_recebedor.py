@@ -91,10 +91,29 @@ class TextInputTelefone(TextInput):
         return super().insert_text(substring, from_undo=from_undo)
 
 class TelaCadastrarRecebedor(Screen):
-    # def __init__(self, **kwargs):
-    #     if banco.retornar_recebedor(conexao) > 0:
-    #     self.ids.txt_nome.text = ""
-    #     super(Screen,self).__init__(**kwargs)
+
+    def eh_textinput(self, componente):
+        return "txt_" in componente
+
+    def preencher_campos(self):
+        # percorre o dicionário de ids referente aos widgets e filtra
+        # os TextInputs,
+        conexao = sqlite3.connect("recibos.db")
+        recebedor = banco.retornar_recebedor(conexao)
+        if recebedor:
+            self.ids.txt_nome.text = recebedor[1]
+            self.ids.txt_cpf.text = recebedor[2]
+            self.ids.txt_endereco.text = recebedor[3]
+            self.ids.txt_bairro.text = recebedor[4]
+            self.ids.txt_cidade.text = recebedor[5]
+            self.ids.txt_uf.text = recebedor[6]
+            self.ids.txt_telefone.text = recebedor[7]
+        conexao.close()
+
+        return
+
+    def on_enter(self):
+        self.preencher_campos()
 
     def exibir_popup(self, titulo, mensagem):
         pop = Popup(title=titulo,
@@ -104,9 +123,9 @@ class TelaCadastrarRecebedor(Screen):
 
     def validar_campos(self):
         # percorre o dicionário de ids referente aos widgets e filtra
-        # os TextInputs com prefixo txt_, verificando se estão vazios
+        # os TextInputs, verificando se estão vazios, para colocar o foco
         for item in self.ids:
-            if "txt_" in item:
+            if self.eh_textinput(item):
                 if not self.ids[item].text:
                     self.ids[item].focus = True
                     self.exibir_popup('Campo inválido', 'Preencha corretamente o ' + item + '.')
@@ -122,8 +141,12 @@ class TelaCadastrarRecebedor(Screen):
                  self.ids.txt_endereco.text, self.ids.txt_bairro.text,
                  self.ids.txt_cidade.text, self.ids.txt_uf.text,
                  self.ids.txt_telefone.text]
+        recebedor = banco.retornar_recebedor(conexao)
         # grava os dados
-        banco.cadastrar_recebedor(conexao, dados)
+        if not recebedor:
+            banco.cadastrar_recebedor(conexao, dados)
+        else:
+            banco.alterar_recebedor(conexao, dados)
         # fecha a conexão com o banco
         conexao.close()
         self.exibir_popup('Cadastro','Recebedor cadastrado com sucesso!')

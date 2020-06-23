@@ -57,10 +57,27 @@ def cadastrar_recebedor(conexao, dados):
 
     return cursor.lastrowid
 
+def alterar_recebedor(conexao, dados):
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        UPDATE recebedores SET 
+            nome=?,
+            cpf=?,
+            endereco=?,
+            bairro=?,
+            cidade=?,
+            uf=?,
+            telefone=?
+            WHERE recebedor_id = 1
+    ''', dados)
+
+    conexao.commit()
+
 def retornar_recebedor(conexao):
     cursor = conexao.cursor()
     cursor.execute("SELECT * FROM recebedores;")
-    return cursor.fetchone()[0]
+    return cursor.fetchone()
 
 def cadastrar_pagador(conexao, dados):
     cursor = conexao.cursor()
