@@ -14,13 +14,14 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 # mensagens em popup
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+
 # usado para carregar as definições do arquivo .kv
 from kivy.lang.builder import Builder
 # carrega as definições da interface gráfica
 # usei Builder.load_string com o método open, passando a codificação
 # em utf-8, pois se usar o método load_file, passando direto o arquivo
 # gui.kv, os acentos não são reconhecidos
-Builder.load_string(open("tela_consultar_itens.kv",encoding="utf-8").read())
+Builder.load_string(open("pagadores/tela_consultar_pagadores.kv",encoding="utf-8").read())
 
 class SelectableRecycleGridLayout(FocusBehavior, LayoutSelectionBehavior, RecycleGridLayout):
     pass
@@ -31,22 +32,20 @@ class TableHeaderLabel(RecycleDataViewBehavior, Label):
 class TableRowLabel(RecycleDataViewBehavior, Label):
     pass
 
-class TelaConsultarItens(Screen):
+class TelaConsultarPagadores(Screen):
     data_items = ListProperty([])
 
     def __init__(self, **kwargs):
-        super(TelaConsultarItens, self).__init__(**kwargs)
-        self.retornar_itens()
+        super(TelaConsultarPagadores, self).__init__(**kwargs)
+        self.retornar_pagadores()
 
-    def retornar_itens(self):
-        conexao = sqlite3.connect("recibos.db")
-        cursor = conexao.cursor()
+    def retornar_pagadores(self):
+        connection = sqlite3.connect("recibos.db")
+        cursor = connection.cursor()
 
-        cursor.execute("SELECT descricao,valor FROM itens ORDER BY item_id ASC")
+        cursor.execute("SELECT nome,cpf,telefone FROM pagadores ORDER BY pagador_id ASC")
         rows = cursor.fetchall()
         
-        conexao.close()
-
         self.data_items.clear()
         for row in rows:
             for col in row:

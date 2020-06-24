@@ -9,7 +9,7 @@ from kivy.lang.builder import Builder
 # usei Builder.load_string com o método open, passando a codificação
 # em utf-8, pois se usar o método load_file, passando direto o arquivo
 # gui.kv, os acentos não são reconhecidos
-Builder.load_string(open("tela_cadastrar_pagadores.kv",encoding="utf-8").read())
+Builder.load_string(open("pagadores/tela_cadastrar_pagadores.kv",encoding="utf-8").read())
 
 # banco de dados
 import sqlite3

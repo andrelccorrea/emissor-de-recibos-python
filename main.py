@@ -11,14 +11,14 @@ from kivy.core.text import LabelBase
 from sqlite3 import connect
 from banco_sqlite import cria_banco
 
-#carrega as telas de seus respectivos arquivos
-from tela_inicial import TelaInicial
-from tela_cadastrar_recebedor import TelaCadastrarRecebedor
-from tela_cadastrar_pagadores import TelaCadastrarPagadores
-from tela_consultar_pagadores import TelaConsultarPagadores
-from tela_cadastrar_itens import TelaCadastrarItens
-from tela_consultar_itens import TelaConsultarItens
-from tela_emitir_recibo import TelaEmitirRecibo
+# carrega as telas de seus respectivos arquivos
+from inicio.tela_inicial import TelaInicial
+from recebedor.tela_cadastrar_recebedor import TelaCadastrarRecebedor
+from pagadores.tela_cadastrar_pagadores import TelaCadastrarPagadores
+from pagadores.tela_consultar_pagadores import TelaConsultarPagadores
+from itens.tela_cadastrar_itens import TelaCadastrarItens
+from itens.tela_consultar_itens import TelaConsultarItens
+from recibo.tela_emitir_recibo import TelaEmitirRecibo
 
 # cria o banco se não existir
 # deve ficar antes de adicionar as telas ao ScreenManager

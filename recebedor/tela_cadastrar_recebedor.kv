@@ -24,13 +24,10 @@
     # força a utilizar a largura informada
     size_hint_x: None
     width: dp(500)
-
-# TODO: adicionar campo para carregar o logo usando FileChooser
-# configurar tamanho dos TextInputs
-# gerenciar o foco
-# gerenciar navegação
-# validar dados (py)
-# conectar com o banco (py)
+    # permite usar o TAB para mudar de campo
+    write_tab: False
+    # somente 1 linha
+    multiline: False
 
 <TelaCadastrarRecebedor>:
     # cor de fundo
@@ -71,12 +68,9 @@
         pos_hint: { 'x':.02 , 'center_y':.80 }
     TextInputNome:
         id: txt_nome
-        multiline: False
         size_hint_x: .5
         pos_hint: { 'x':.02, 'center_y':.76 }
-        focus: True
         on_text_validate: txt_cpf.focus = True
-        write_tab: False
     Label:
         id: lbl_cpf
         size_hint: .06, .03
@@ -89,11 +83,9 @@
         pos_hint: { 'x':.02 , 'center_y':.70 }
     TextInputCpf:
         id: txt_cpf
-        multiline: False
         size_hint_x: .16
         pos_hint: { 'x':.02 , 'center_y':.66 }
         on_text_validate: txt_endereco.focus = True
-        write_tab: False
     Label:
         id: lbl_endereco
         size_hint: .08, .03
@@ -106,11 +98,9 @@
         pos_hint: { 'x':.02 , 'center_y':.60 }
     TextInputEndereco:
         id: txt_endereco
-        multiline: False
         size_hint_x: .5
         pos_hint: { 'x':.02 , 'center_y':.56 }
         on_text_validate: txt_bairro.focus = True
-        write_tab: False
     Label:
         id: lbl_bairro
         size_hint: .06, .03
@@ -123,11 +113,9 @@
         pos_hint: { 'x':.02 , 'center_y':.50 }
     TextInputBairro:
         id: txt_bairro
-        multiline: False
         size_hint_x: .25
         pos_hint: { 'x':.02 , 'center_y':.46 }
         on_text_validate: txt_cidade.focus = True
-        write_tab: False
     Label:
         id: lbl_cidade
         size_hint: .06, .03
@@ -140,11 +128,9 @@
         pos_hint: { 'x':.02 , 'center_y':.40 }
     TextInputCidade:
         id: txt_cidade
-        multiline: False
         size_hint_x: .25
         pos_hint: { 'x':.02 , 'center_y':.36 }
         on_text_validate: txt_uf.focus = True
-        write_tab: False
     Label:
         id: lbl_uf
         size_hint: .03, .03
@@ -157,11 +143,9 @@
         pos_hint: { 'x':.02 , 'center_y':.30 }
     TextInputUf:
         id: txt_uf
-        multiline: False
         size_hint_x: .05
         pos_hint: { 'x':.02 , 'center_y':.26 }
         on_text_validate: txt_telefone.focus = True
-        write_tab: False
     Label:
         id: lbl_telefone
         size_hint: .16, .03
@@ -174,11 +158,9 @@
         pos_hint: { 'x':.02 , 'center_y':.20 }
     TextInputTelefone:
         id: txt_telefone
-        multiline: False
         size_hint_x: .16
         pos_hint: { 'x':.02 , 'center_y':.16 }
         on_text_validate: gravar.focus = True
-        write_tab: False
     BoxLayout:
         id: box_botoes
         # força a utilizar a altura informada

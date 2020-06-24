@@ -24,6 +24,10 @@
     # força a utilizar a largura informada
     size_hint_x: None
     width: dp(500)
+    # permite usar o TAB para mudar de campo
+    write_tab: False
+    # somente 1 linha
+    multiline: False
 
 <TelaEmitirRecibo>:
     # cor de fundo
@@ -34,6 +38,10 @@
             pos: self.pos
             size: self.size
     BoxLayout:
+        id: box_botoes
+        # força a utilizar a altura informada
+        size_hint_y: None
+        height: dp(50)
         Button:
             id: voltar
             text: 'Voltar'
