@@ -69,7 +69,7 @@ class TelaCadastrarPagadores(Screen):
         # abre uma conexão com o banco
         conexao = sqlite3.connect("recibos.db")
 
-        if banco.buscar_pagador(conexao, self.ids.txt_cpf.text) == 0:
+        if not banco.buscar_pagador_pelo_cpf(conexao, self.ids.txt_cpf.text):
             # junta os dados do form
             dados = [self.ids.txt_nome.text, self.ids.txt_cpf.text, self.ids.txt_telefone.text]
             # grava os dados

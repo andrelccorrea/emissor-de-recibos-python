@@ -94,10 +94,20 @@ def cadastrar_pagador(conexao, dados):
 
     return cursor.lastrowid
 
-def buscar_pagador(conexao, cpf):
+def buscar_pagador_pelo_cpf(conexao, cpf):
     cursor = conexao.cursor()
-    cursor.execute("SELECT COUNT(cpf) FROM pagadores WHERE cpf=?;", [cpf] )
-    return cursor.fetchone()[0]
+    cursor.execute("SELECT * FROM pagadores WHERE cpf=?;", [cpf] )
+    return cursor.fetchone()
+
+def buscar_pagador_pelo_id(conexao, id):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM pagadores WHERE pagador_id=?;", [id] )
+    return cursor.fetchone()
+
+def retornar_pagadores(conexao):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM pagadores")
+    return cursor.fetchall()
 
 def cadastrar_item(conexao, dados):
     cursor = conexao.cursor()
@@ -112,3 +122,17 @@ def cadastrar_item(conexao, dados):
     conexao.commit()
 
     return cursor.lastrowid
+
+def retornar_itens(conexao):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM itens")
+    return cursor.fetchall()
+
+def buscar_item_pelo_id(conexao, id):
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM itens WHERE item_id=?;", [id] )
+    return cursor.fetchone()
+
+    # TODO: criar classe pai contendo a conexão
+    #       criar classes separadas, herdando da classe pai, contendo os métodos
+    #       específicos de cada tabela, já carregando a conexão no super.init

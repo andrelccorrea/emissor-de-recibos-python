@@ -2,6 +2,26 @@
 # converte as cores de HEX para o padrão rgba float do kivy
 #:import rgba kivy.utils.rgba
 
+<TableHeaderLabel>:
+    canvas.before:
+        Color:
+            rgba: rgba('#735771')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    text_size: self.size
+    halign: 'center'
+
+<TableRowLabel>:
+    canvas.before:
+        Color:
+            rgba: rgba('#3e2f3d')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    text_size: self.size
+    halign: 'center'
+
 # padrão para os Buttons dessa tela
 <Button>:
     background_color: rgba('#973e95')
@@ -29,6 +49,17 @@
     # somente 1 linha
     multiline: False
 
+<Label>:
+    text_size: self.size
+
+# configura os itens do Spinner com as mesmas medidas
+# usadas no Spinner
+<SpinnerOption>:
+    size_hint: None, None
+    size: 80,30
+    text_size: self.size
+    halign: 'center'
+
 <TelaEmitirRecibo>:
     # cor de fundo
     canvas.before:
@@ -37,6 +68,111 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    Label:
+        id: lbl_nome_da_tela
+        # fonte baixada e configurada no arquivo .py
+        font_name: 'AlexBrush'
+        # tamanho da fonte
+        font_size: dp(65)
+        color: rgba('#3e2f3d')
+        text: 'Emitir Recibo'
+        # alinha o texto horizontalmente no label
+        halign: 'center'
+        # alinha o texto verticalmente no label
+        valign: 'center'
+        # posiciona o centro do label em x, y
+        # ‘x’, ‘right’ e ‘center_x’ usam o parent width. 
+        # ‘y’, ‘top’ e ‘center_y’ usam o parent height.
+        pos_hint: {'center_x':.5, 'center_y':.92}
+    Label:
+        id: lbl_pagador
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Pagador'
+        pos_hint: { 'x':.02 , 'center_y':.80 }
+    TextInputPagador:
+        id: txt_pagador
+        size_hint_x: .5
+        pos_hint: { 'x':.02, 'center_y':.76 }
+        on_text_validate: txt_item.focus = True
+    SpinnerPagadores:
+        id: spinner_pagadores
+        size_hint: None, None
+        size: 80, 30
+        pos_hint: { 'x':.53 , 'center_y':.76 }
+        text: 'Código'
+        on_text: root.preencher_txt_pagador()
+    Label:
+        id: lbl_item
+        size_hint: .08, .03
+        # para o texto não extrapolar o tamanho do widget
+        halign: "left"
+        valign: "center"
+        color: rgba('#3e2f3d')
+        text: 'Item'
+        pos_hint: { 'x':.02 , 'center_y':.70 }
+    TextInputItem:
+        id: txt_item
+        size_hint_x: .5
+        pos_hint: { 'x':.02, 'center_y':.66 }
+        # on_text_validate: txt_iten.focus = True
+    SpinnerItens:
+        id: spinner_itens
+        size_hint: None, None
+        size: 80, 30
+        pos_hint: { 'x':.53 , 'center_y':.66 }
+        text: 'Código'
+        on_text: root.preencher_txt_item()
+    ButtonIncluirItem:
+        id: btn_itens
+        size_hint: None, None
+        size: 80, 30
+        text: 'Incluir'
+        pos_hint: { 'x':.64 , 'center_y':.66 }
+        on_press: root.incluir_item_na_tabela()
+
+    BoxTabela:
+        canvas.before:
+            Color:
+                rgba: rgba('#B388B0')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: "vertical"
+        size_hint: .96 , .4
+        pos_hint: { 'x':.02 , 'y':.2 }
+        GridLayout:
+            size_hint: 1, None
+            height: 25
+            cols: 4
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Cod"
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Descrição"
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Preço"
+            TableHeaderLabel:
+                color: rgba('#3e2f3d')
+                text: "Qtd"
+        BoxLayout:
+            RecycleView:
+                viewclass: 'TableRowLabel'
+                data: [{'text': str(x)} for x in root.data_items]
+                SelectableRecycleGridLayout:
+                    cols: 4
+                    default_size: None, dp(26)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    multiselect: False
+                    touch_multiselect: False    
     BoxLayout:
         id: box_botoes
         # força a utilizar a altura informada
